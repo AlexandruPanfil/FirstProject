@@ -35,8 +35,8 @@ class Root(Tk):
         enter = authentification(user, pasw)
         if enter:
             self.destroy()
-            # print("True")
-            Root_work()
+            root2 = Root_work()
+            root2.mainloop()
         else:
             print("Log failed")
 

@@ -160,6 +160,6 @@ class Root_work(Tk):
 
 
 
-if __name__ == "__main__":
-    root2 = Root_work()
-    root2.mainloop()
+# if __name__ == "__main__":
+#     root2 = Root_work()
+#     root2.mainloop()
