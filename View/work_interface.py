@@ -1,214 +1,165 @@
-# import tkinter
-from tkinter import *
-# from Controler import buttons
+from tkinter import Tk, Label, Button, Entry, Message, END
 
+class Root_work(Tk):
+    def __init__(self):
+        super().__init__()
+        self.font = ("Colibri", 15)
+        self.font_bold = ("Colibri", 15, "bold")
+        self.geometry("1550x750")
+        self.title("Workstation")
+        self.configure(bg="gray")
+        self.minsize(1250, 600)
+        self.maxsize(1920, 1080)
 
-def search():
-    print("Hello")
+        self.produs_code_message = Message(self, text="ID: ", font=self.font_bold, fg="black")
+        self.produs_code_message.place(x=10, y=10, width=120, height=40)
 
+        self.produs_code_label = Label(self, text="", font=self.font)
+        self.produs_code_label.place(x=130, y=10, width=1000, height=40)
 
-def button_0():
-    work_interface.add_entry.insert(END, 0)
+        self.produs_name_message = Label(self, text="Name: ", font=self.font_bold, fg="black")
+        self.produs_name_message.place(x=10, y=55, width=120, height=40)
 
+        self.produs_name_label = Label(self, text="", font=self.font)
+        self.produs_name_label.place(x=130, y=55, width=1000, height=40)
 
-def button_1():
-    work_interface.add_entry.insert(END, 1)
+        self.produs_buc_message = Label(self, text="Bucata: ", fg="Black", font=self.font_bold)
+        self.produs_buc_message.place(x=1155, y=10, width=100, height=40)
 
+        self.produs_buc_label = Label(self, text="", font=self.font, justify="left")
+        self.produs_buc_label.place(x=1255, y=10, width=265, height=40)
 
-def button_2():
-    work_interface.add_entry.insert(END, 2)
+        self.produs_pret_message = Label(self, text="Pret: ", fg="Black", font=self.font_bold)
+        self.produs_pret_message.place(x=1155, y=55, width=100, height=40)
 
+        self.produs_pret_label = Label(self, text="", font=self.font, justify="left")
+        self.produs_pret_label.place(x=1255, y=55, width=265, height=40)
 
-def button_3():
-    work_interface.add_entry.insert(END, 3)
+        self.line1 = Label(self)
+        self.line1.place(x=0, y=105, width=1920, height=1)
 
+        self.lista_produse_label = Label(self, text="", font=self.font)
+        self.lista_produse_label.place(x=10, y=115, width=850, height=600)
 
-def button_4():
-    work_interface.add_entry.insert(END, 4)
+        self.line2 = Label(self, bg="gray")
+        self.line2.place(x=10, y=714, width=850, height=600)
 
+        self.total_message = Message(self, text="Total: ", font=self.font_bold)
+        self.total_message.place(x=10, y=715, width=100, height=40)
 
-def button_5():
-    work_interface.add_entry.insert(END, 5)
+        self.total_label = Label(self, text="", font=self.font_bold)
+        self.total_label.place(x=110, y=715, width=750, height=40)
 
+        self.white_label = Label(self)
+        self.white_label.place(x=885, y=115, width=635, height=600)
 
-def button_6():
-    work_interface.add_entry.insert(END, 6)
+        self.clear_button = Button(self, text="Clear", font=self.font_bold, command=self.clear)
+        self.clear_button.place(x=885, y=115, width=100, height=80)
 
+        self.add_entry = Entry(self, text="", font=self.font_bold, justify="center")
+        self.add_entry.place(x=985, y=115, width=535, height=80)
 
-def button_7():
-    work_interface.add_entry.insert(END, 7)
+        self.button_7 = Button(self, text=7, command=self.button_7, font=self.font_bold, bg="light blue")
+        self.button_7.place(x=885, y=200, width=100, height=80)
 
+        self.button_8 = Button(self, text=8, command=self.button_8, font=self.font_bold, bg="light blue")
+        self.button_8.place(x=995, y=200, width=100, height=80)
 
-def button_8():
-    work_interface.add_entry.insert(END, 8)
+        self.button_9 = Button(self, text=9, command=self.button_9, font=self.font_bold, bg="light blue")
+        self.button_9.place(x=1105, y=200, width=100, height=80)
 
+        self.button_4 = Button(self, text=4, command=self.button_4, font=self.font_bold, bg="light blue")
+        self.button_4.place(x=885, y=290, width=100, height=80)
 
-def button_9():
-    work_interface.add_entry.insert(END, 9)
+        self.button_5 = Button(self, text=5, command=self.button_5, font=self.font_bold, bg="light blue")
+        self.button_5.place(x=995, y=290, width=100, height=80)
 
+        self.button_6 = Button(self, text=6, command=self.button_6, font=self.font_bold, bg="light blue")
+        self.button_6.place(x=1105, y=290, width=100, height=80)
 
-def clear():
-    work_interface.add_entry.delete(0, END)
+        self.button_1 = Button(self, text=1, command=self.button_1, font=self.font_bold, bg="light blue")
+        self.button_1.place(x=885, y=380, width=100, height=80)
 
+        self.button_2 = Button(self, text=2, command=self.button_2, font=self.font_bold, bg="light blue")
+        self.button_2.place(x=995, y=380, width=100, height=80)
 
-def dot():
-    work_interface.add_entry.insert(END, ".")
+        self.button_3 = Button(self, text=3, command=self.button_3, font=self.font_bold, bg="light blue")
+        self.button_3.place(x=1105, y=380, width=100, height=80)
 
+        self.search_button = Button(self,text="Search", command=self.search, font=self.font_bold, bg="light blue")
+        self.search_button.place(x=885, y=470, width=100, height=80)
 
-def add():
-    pass
+        self.button_0 = Button(self, text=0, command=self.button_0, font=self.font_bold, bg="light blue")
+        self.button_0.place(x=995, y=470, width=100, height=80)
 
+        self.dot_button = Button(self,text=".", command=self.dot, font=self.font_bold, bg="light blue")
+        self.dot_button.place(x=1105, y=470, width=100, height=80)
 
-def delete():
-    pass
+        self.add_button = Button(self,text="Add", font=self.font_bold, bg="light green", command=self.add)
+        self.add_button.place(x=1215, y=200, width=300, height=80)
 
+        self.delete_button = Button(self,text="Delete", font=self.font_bold, bg="light green", command=self.delete)
+        self.delete_button.place(x=1215, y=290, width=300, height=80)
 
-def anulare():
-    pass
+        self.anulare_button = Button(self,text="Anulare", font=self.font_bold, bg="light green", command=self.anulare)
+        self.anulare_button.place(x=1215, y=380, width=300, height=80)
 
+        self.pachet_button = Button(self,text="Pachet", font=self.font_bold, bg="light blue", command=self.pachet)
+        self.pachet_button.place(x=1215, y=470, width=300, height=80)
 
-def pachet():
-    pass
+    def search(self):
+        print("Hello")
 
+    def button_0(self):
+        self.add_entry.insert(END, 0)
 
-font = ("Colibri", 15)
-font_bold = ("Colibri", 15, "bold")
+    def button_1(self):
+        self.add_entry.insert(END, 1)
 
+    def button_2(self):
+        self.add_entry.insert(END, 2)
 
-window = Tk()
-window.geometry("1550x750")
-window.title("Workstation")
-window.configure(bg="gray")
-window.minsize(1250, 600)
-window.maxsize(1920, 1080)
+    def button_3(self):
+        self.add_entry.insert(END, 3)
 
+    def button_4(self):
+        self.add_entry.insert(END, 4)
 
-produs_code_message = Message(text="ID: ", font=font_bold, fg="black")
-produs_code_message.place(x=10, y=10, width=120, height=40)
+    def button_5(self):
+        self.add_entry.insert(END, 5)
 
+    def button_6(self):
+        self.add_entry.insert(END, 6)
 
-produs_code_label = Label(text="", font=font)
-produs_code_label.place(x=130, y= 10, width= 1000, height= 40)
+    def button_7(self):
+        self.add_entry.insert(END, 7)
 
+    def button_8(self):
+        self.add_entry.insert(END, 8)
 
-produs_name_message = Label(text="Name: ", font=font_bold, fg="black")
-produs_name_message.place(x=10, y=55, width= 120, height= 40)
+    def button_9(self):
+        self.add_entry.insert(END, 9)
 
+    def clear(self):
+        self.add_entry.delete(0, END)
 
-produs_name_label = Label(text="", font=font)
-produs_name_label.place(x=130, y=55, width= 1000, height=40)
+    def dot(self):
+        self.add_entry.insert(END, ".")
 
+    def add(self):
+        pass
 
-produs_buc_message = Label(text="Bucata: ",fg= "Black", font=font_bold)
-produs_buc_message.place(x=1155, y=10, width=100, height= 40)
+    def delete(self):
+        pass
 
+    def anulare(self):
+        pass
 
-produs_buc_label = Label(text="", font=font, justify="left")
-produs_buc_label.place(x=1255, y=10, width= 265, height= 40)
+    def pachet(self):
+        pass
 
 
-produs_pret_message = Label(text="Pret: ", fg="Black", font=font_bold)
-produs_pret_message.place(x=1155, y=55, width=100, height= 40)
 
-
-produs_pret_label = Label(text="", font=font, justify="left")
-produs_pret_label.place(x=1255, y=55, width= 265, height=40)
-
-
-line1 = Label()
-line1.place(x=0, y= 105, width=1920, height=1)
-
-
-lista_produse_label = Label(text="", font=font)
-lista_produse_label.place(x=10, y=115, width=850, height=600)
-
-
-line2 = Label(bg="gray")
-line2.place(x=10, y=714, width=850, height=600)
-
-
-total_message = Message(text="Total: ", font=font_bold)
-total_message.place(x=10, y=715, width=100, height=40)
-
-
-total_label = Label(text="", font=font_bold)
-total_label.place(x=110, y=715, width=750, height=40)
-
-
-white_label = Label()
-white_label.place(x=885, y=115, width=635, height=600)
-
-
-clear_button = Button(text="Clear", font=font_bold, command=clear)
-clear_button.place(x=885, y=115, width=100, height=80)
-
-
-add_entry = Entry(text="", font=font_bold, justify="center")
-add_entry.place(x=985, y=115, width=535, height=80)
-
-
-button_7 = Button(text=7, command=button_7, font=font_bold, bg="light blue")
-button_7.place(x=885, y=200, width=100, height=80)
-
-
-button_8 = Button(text=8, command=button_8, font=font_bold, bg="light blue")
-button_8.place(x=995, y=200, width=100, height=80)
-
-
-button_9 = Button(text=9, command=button_9, font=font_bold, bg="light blue")
-button_9.place(x=1105, y=200, width=100, height=80)
-
-
-button_4 = Button(text=4, command=button_4, font=font_bold, bg="light blue")
-button_4.place(x=885, y=290, width=100, height=80)
-
-
-button_5 = Button(text=5, command=button_5, font=font_bold, bg="light blue")
-button_5.place(x=995, y=290, width=100, height=80)
-
-
-button_6 = Button(text=6, command=button_6, font=font_bold, bg="light blue")
-button_6.place(x=1105, y=290, width=100, height=80)
-
-
-button_1 = Button(text=1, command=button_1, font=font_bold, bg="light blue")
-button_1.place(x=885, y=380, width=100, height=80)
-
-
-button_2 = Button(text=2, command=button_2, font=font_bold, bg="light blue")
-button_2.place(x=995, y=380, width=100, height=80)
-
-
-button_3 = Button(text=3, command=button_3, font=font_bold, bg="light blue")
-button_3.place(x=1105, y=380, width=100, height=80)
-
-
-search_button = Button(text="Search", command=search, font=font_bold, bg="light blue")
-search_button.place(x=885, y=470, width=100, height=80)
-
-
-button_0 = Button(text=0, command=button_0, font=font_bold, bg="light blue")
-button_0.place(x=995, y=470, width=100, height=80)
-
-
-dot_button = Button(text=".", command=dot, font=font_bold, bg="light blue")
-dot_button.place(x=1105, y=470, width=100, height=80)
-
-
-add_button = Button(text="Add", font=font_bold, bg="light green", command=add)
-add_button.place(x=1215, y=200, width=300, height=80)
-
-
-delete_button = Button(text="Delete", font=font_bold, bg="light green", command=delete)
-delete_button.place(x=1215, y=290, width=300, height=80)
-
-
-anulare_button = Button(text="Anulare", font=font_bold, bg="light green", command=anulare)
-anulare_button.place(x=1215, y=380, width=300, height=80)
-
-
-pachet_button = Button(text="Pachet", font=font_bold, bg="light blue", command=pachet)
-pachet_button.place(x=1215, y=470, width=300, height=80)
-
-
-window.mainloop()
+if __name__ == "__main__":
+    root2 = Root_work()
+    root2.mainloop()

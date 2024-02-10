@@ -11,9 +11,17 @@ def connect_db():
     admin text)""")
     db.commit()
 
-    cursor.execute("""SELECT user, pasword FROM Users """)
-    for i in cursor.fetchall():
-        print(i)
+    cursor.execute("""CREATE TABLE IF NOT EXISTS Products(
+    id integer PRIMARY KEY,
+    name text NOT NULL,
+    price real NOT NULL,
+    quantity integer NOT NULL
+    )""")
+    db.commit()
+
+    # cursor.execute("""SELECT user, pasword FROM Users """)
+    # for i in cursor.fetchall():
+    #     print(i)
 
     db.close()
 
