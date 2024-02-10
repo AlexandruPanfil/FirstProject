@@ -1,4 +1,5 @@
 from tkinter import Tk, Label, Button, Entry, Message, END
+from Controler.Database import products_db
 
 class Root_work(Tk):
     def __init__(self):
@@ -111,49 +112,50 @@ class Root_work(Tk):
         print("Hello")
 
     def button_0(self):
-        self.add_entry.insert(END, 0)
-
+        buton_0 =self.button_0.getint(0)
+        self.add_entry.insert(END, buton_0)
     def button_1(self):
         self.add_entry.insert(END, 1)
-
     def button_2(self):
         self.add_entry.insert(END, 2)
-
     def button_3(self):
         self.add_entry.insert(END, 3)
-
     def button_4(self):
         self.add_entry.insert(END, 4)
-
     def button_5(self):
         self.add_entry.insert(END, 5)
-
     def button_6(self):
         self.add_entry.insert(END, 6)
-
     def button_7(self):
         self.add_entry.insert(END, 7)
-
     def button_8(self):
         self.add_entry.insert(END, 8)
-
     def button_9(self):
         self.add_entry.insert(END, 9)
+    def dot(self):
+        self.add_entry.insert(END, ".")
 
     def clear(self):
         self.add_entry.delete(0, END)
 
-    def dot(self):
-        self.add_entry.insert(END, ".")
 
     def add(self):
-        pass
+        bar_code = int(self.add_entry.get())
+        product = products_db.get_from_db_Products(bar_code)
+        # print(product)
+        self.lista_produse_label["text"] = f"Denumire:{product[1]:^10}| Pret: {product[2]:^8}| ID: {product[4]:^12}"
+        self.produs_code_label["text"] = f"{product[4]}"
+        self.produs_pret_label["text"] = f"{product[2]}"
+        self.produs_name_label["text"] = f"{product[1]}"
 
     def delete(self):
         pass
 
     def anulare(self):
-        pass
+        self.lista_produse_label["text"] = ""
+        self.produs_name_label["text"] = ""
+        self.produs_pret_label["text"] = ""
+        self.produs_code_label["text"] = ""
 
     def pachet(self):
         pass
