@@ -15,9 +15,13 @@ def connect_db():
     id integer PRIMARY KEY,
     name text NOT NULL,
     price real NOT NULL,
-    quantity integer NOT NULL
+    quantity integer NOT NULL, 
+    bar_code integer NOT NULL
     )""")
     db.commit()
+
+    # cursor.execute("SELECT * FROM Products")
+    # print(cursor.fetchall())
 
     # cursor.execute("""SELECT user, pasword FROM Users """)
     # for i in cursor.fetchall():

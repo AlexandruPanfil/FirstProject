@@ -13,14 +13,15 @@ def add_to_db_Users(user= None, password=None):
         db.commit()
         db.close()
 
-def add_to_db_Products(name, price, quantity):
+def add_to_db_Products(name, price, quantity, bar_code):
         with sqlite3.connect("database.db") as db:
                 cursor = db.cursor()
         cursor.execute("SELECT max(id) FROM Products")
         max_id = cursor.fetchone()[0]
         new_id = 1 if max_id is None else max_id + 1
-        cursor.execute("""INSERT INTO Products(id, name, price, quantity)
-        VALUES(?,?,?,?)""", (new_id, name, price, quantity))
+        # print(new_id, name, price, quantity, bar_code)
+        cursor.execute("""INSERT INTO Products(id, name, price, quantity,  bar_code)
+        VALUES(?,?,?,?,?)""", (new_id, name, price, quantity, bar_code))
         db.commit()
         db.close()
 
@@ -33,5 +34,7 @@ def get_from_db_Products():
                 print(i)
         db.close()
 
+
+get_from_db_Products()
 
 
