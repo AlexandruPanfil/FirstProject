@@ -1,4 +1,4 @@
-from tkinter import Tk, Label, Button, Entry, Message, END
+from tkinter import Tk, Label, Button, Entry, Message, END, Menu
 from Controler.Database import products_db
 
 class Root_work(Tk):
@@ -11,6 +11,14 @@ class Root_work(Tk):
         self.configure(bg="gray")
         self.minsize(1250, 600)
         self.maxsize(1920, 1080)
+        # self.menu_bar = Menu(self)
+        # self.config(menu=self.menu_bar)
+        # self.menu_option = Menu(self.menu_bar, tearoff=0)
+        # self.menu_option.add_command(label="Info", command=print("This is info menu"))
+        # self.menu_option.add_command(label="Some new func")
+        # self.menu_option.add_separator()
+        # self.menu_option.add_command(label="Exit", command=self.destroy)
+        # self.menu_bar.add_cascade(label="Options", menu=self.menu_option)
 
         self.produs_code_message = Message(self, text="ID: ", font=self.font_bold, fg="black")
         self.produs_code_message.place(x=10, y=10, width=120, height=40)

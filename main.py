@@ -1,4 +1,4 @@
-from tkinter import Tk, Label, Button, Entry
+from tkinter import Tk, Label, Button, Entry, Menu
 from Controler.authentification import authentification
 from View.work_interface import Root_work
 
@@ -36,9 +36,21 @@ class Root(Tk):
         if enter:
             self.destroy()
             root2 = Root_work()
+            root2.menu_bar = Menu(root2)
+            root2.config(menu=root2.menu_bar)
+            root2.menu_option = Menu(root2.menu_bar, tearoff=0)
+            root2.menu_option.add_command(label="Info", command=print("This is info menu"))
+            root2.menu_option.add_command(label="Some new func")
+            root2.menu_option.add_separator()
+            root2.menu_option.add_command(label="Exit", command=root2.destroy)
+            root2.menu_bar.add_cascade(label="Options", menu=root2.menu_option)
             root2.mainloop()
         else:
             print("Log failed")
+
+    # def relogin(self):
+    #     root2.destroy()
+    #     Root()
 
 
 if __name__ == "__main__":
