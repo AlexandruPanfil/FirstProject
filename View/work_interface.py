@@ -14,14 +14,14 @@ class Root_work(Tk):
         self.configure(bg="gray")
         self.minsize(1250, 600)
         self.maxsize(1920, 1080)
-        self.menu_bar = Menu(self)
-        self.config(menu=self.menu_bar)
-        self.menu_option = Menu(self.menu_bar, tearoff=0)
-        self.menu_option.add_command(label="Info", command=print("This is info menu"))
-        self.menu_option.add_command(label="Some new func")
-        self.menu_option.add_separator()
-        self.menu_option.add_command(label="Exit", command=self.destroy)
-        self.menu_bar.add_cascade(label="Options", menu=self.menu_option)
+        # self.menu_bar = Menu(self)
+        # self.config(menu=self.menu_bar)
+        # self.menu_option = Menu(self.menu_bar, tearoff=0)
+        # self.menu_option.add_command(label="Info", command=print("This is info menu"))
+        # self.menu_option.add_command(label="Some new func")
+        # self.menu_option.add_separator()
+        # self.menu_option.add_command(label="Exit", command=self.destroy)
+        # self.menu_bar.add_cascade(label="Options", menu=self.menu_option)
 
         self.produs_code_message = Message(self, text="ID: ", font=self.font_bold, fg="black")
         self.produs_code_message.place(x=10, y=10, width=120, height=40)
@@ -172,28 +172,44 @@ class Root_work(Tk):
 
     def add(self):
         bar_code = int(self.add_entry.get())
-        product = products_db.get_from_db_Products(bar_code)
-        self.date_tabel = []
-        self.date_tabel.append(product)
+        self.product = products_db.get_from_db_Products(bar_code)
+        # print(product)
+        # self.date_tabel = []
+        # self.date_tabel.append(product)
         bucati_produs = Bucati(self.callback_bucati)
-        print(bucati_produs)
+        # print(bucati_produs)
+        # # Utilizează un index pentru a itera prin listă dacă ai nevoie să modifici elementele
+        # for index, (id, nume, pret, buc, pret_total) in enumerate(self.date_tabel):
+        #     id = index + 1
+        #     buc = 1
+        #     pret_total = pret * buc
+        #
+        #     self.date_tabel[index] = (id, nume, pret, buc, pret_total)
+        #
+        # for date in self.date_tabel:
+        #     self.tabel_view.insert("", END, values=date)
+        return self.product
 
-        # v2
-        # Utilizează un index pentru a itera prin listă dacă ai nevoie să modifici elementele
+    def callback_bucati(self, valoare):
+        self.date_tabel = []
+        self.date_tabel.append(self.product)
+        # print(self.date_tabel)
+        self.clear()
         for index, (id, nume, pret, buc, pret_total) in enumerate(self.date_tabel):
-            # print(index)
-            id = index + 1
-            buc = self.callback_bucati
+            id = id
+            buc = valoare
             pret_total = pret * buc
-
-            # Reasamblează tuplul cu noua valoare pret_total
             self.date_tabel[index] = (id, nume, pret, buc, pret_total)
-            # print(self.date_tabel[index])
 
         for date in self.date_tabel:
             self.tabel_view.insert("", END, values=date)
-    def callback_bucati(self, valoare):
-        return valoare
+        # for index, (id, nume, pret, buc, pret_total) in enumerate(self.date_tabel):
+        #     if index
+        #             buc += 1
+        #             pret_total = pret * buc
+        #             self.date_tabel[index] = (id, nume, pret, buc, pret_total)
+
+        # return valoare
 
     def delete(self):
         pass
