@@ -42,6 +42,7 @@ class Root(Tk):
             root2.menu_option.add_command(label="Info", command=print("This is info menu"))
             root2.menu_option.add_command(label="Some new func")
             root2.menu_option.add_separator()
+            root2.menu_option.add_command(label="Relogin")
             root2.menu_option.add_command(label="Exit", command=root2.destroy)
             root2.menu_bar.add_cascade(label="Options", menu=root2.menu_option)
             root2.mainloop()

@@ -1,4 +1,7 @@
-from tkinter import Tk, Label, Button, Entry, Message, END, Menu
+from tkinter import * #Tk, Label, Button, Entry, Message, END, Menu, Frame, LEFT, BOTH
+from tkinter import ttk #Treeview
+from tkinter.ttk import Treeview
+from View.bucati_menu import Bucati
 from Controler.Database import products_db
 
 class Root_work(Tk):
@@ -11,14 +14,14 @@ class Root_work(Tk):
         self.configure(bg="gray")
         self.minsize(1250, 600)
         self.maxsize(1920, 1080)
-        # self.menu_bar = Menu(self)
-        # self.config(menu=self.menu_bar)
-        # self.menu_option = Menu(self.menu_bar, tearoff=0)
-        # self.menu_option.add_command(label="Info", command=print("This is info menu"))
-        # self.menu_option.add_command(label="Some new func")
-        # self.menu_option.add_separator()
-        # self.menu_option.add_command(label="Exit", command=self.destroy)
-        # self.menu_bar.add_cascade(label="Options", menu=self.menu_option)
+        self.menu_bar = Menu(self)
+        self.config(menu=self.menu_bar)
+        self.menu_option = Menu(self.menu_bar, tearoff=0)
+        self.menu_option.add_command(label="Info", command=print("This is info menu"))
+        self.menu_option.add_command(label="Some new func")
+        self.menu_option.add_separator()
+        self.menu_option.add_command(label="Exit", command=self.destroy)
+        self.menu_bar.add_cascade(label="Options", menu=self.menu_option)
 
         self.produs_code_message = Message(self, text="ID: ", font=self.font_bold, fg="black")
         self.produs_code_message.place(x=10, y=10, width=120, height=40)
@@ -47,8 +50,29 @@ class Root_work(Tk):
         self.line1 = Label(self)
         self.line1.place(x=0, y=105, width=1920, height=1)
 
-        self.lista_produse_label = Label(self, text="", font=self.font)
-        self.lista_produse_label.place(x=10, y=115, width=850, height=600)
+        # self.lista_produse_label = Label(self, text="", font=self.font)
+        # self.lista_produse_label.place(x=10, y=115, width=850, height=600)
+
+        self.tabel_produse_frame = Frame(self)
+        self.tabel_produse_frame.place(x=10, y=115, width=850, height=600)
+
+        self.coloane = ("ID", "Name", "Pret", "Bucate", "Pret Total")
+        self.tabel_view = (Treeview(self.tabel_produse_frame, columns=self.coloane, show="headings", height=1000))
+        self.tabel_view.grid(row=0, column=0)
+
+        for coloana in self.coloane:
+            self.tabel_view.heading(coloana, text=coloana)
+
+        self.tabel_view.column("ID", width=50)
+        self.tabel_view.column("Name", width=400)
+        self.tabel_view.column("Pret", width=120)
+        self.tabel_view.column("Bucate", width=120)
+        self.tabel_view.column("Pret Total", width=160)
+        self.tabel_view.grid(row=0, column=0)
+
+        self.scroll_bar = Scrollbar(self.tabel_produse_frame, orient=VERTICAL, command=self.tabel_view.yview)
+        self.tabel_view.configure(yscroll=self.scroll_bar.set)
+        self.scroll_bar.grid(row=0, column=1)
 
         self.line2 = Label(self, bg="gray")
         self.line2.place(x=10, y=714, width=850, height=600)
@@ -120,8 +144,7 @@ class Root_work(Tk):
         print("Hello")
 
     def button_0(self):
-        buton_0 =self.button_0.getint(0)
-        self.add_entry.insert(END, buton_0)
+        self.add_entry.insert(END, 0)
     def button_1(self):
         self.add_entry.insert(END, 1)
     def button_2(self):
@@ -150,11 +173,27 @@ class Root_work(Tk):
     def add(self):
         bar_code = int(self.add_entry.get())
         product = products_db.get_from_db_Products(bar_code)
-        # print(product)
-        self.lista_produse_label["text"] = f"Denumire:{product[1]:^10}| Pret: {product[2]:^8}| ID: {product[4]:^12}"
-        self.produs_code_label["text"] = f"{product[4]}"
-        self.produs_pret_label["text"] = f"{product[2]}"
-        self.produs_name_label["text"] = f"{product[1]}"
+        self.date_tabel = []
+        self.date_tabel.append(product)
+        bucati_produs = Bucati(self.callback_bucati)
+        print(bucati_produs)
+
+        # v2
+        # Utilizează un index pentru a itera prin listă dacă ai nevoie să modifici elementele
+        for index, (id, nume, pret, buc, pret_total) in enumerate(self.date_tabel):
+            # print(index)
+            id = index + 1
+            buc = self.callback_bucati
+            pret_total = pret * buc
+
+            # Reasamblează tuplul cu noua valoare pret_total
+            self.date_tabel[index] = (id, nume, pret, buc, pret_total)
+            # print(self.date_tabel[index])
+
+        for date in self.date_tabel:
+            self.tabel_view.insert("", END, values=date)
+    def callback_bucati(self, valoare):
+        return valoare
 
     def delete(self):
         pass
