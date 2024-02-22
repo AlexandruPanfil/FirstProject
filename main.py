@@ -35,23 +35,23 @@ class Root(Tk):
         enter = authentification(user, pasw)
         if enter:
             self.destroy()
-            root2 = Root_work()
-            root2.menu_bar = Menu(root2)
-            root2.config(menu=root2.menu_bar)
-            root2.menu_option = Menu(root2.menu_bar, tearoff=0)
-            root2.menu_option.add_command(label="Info", command=print("This is info menu"))
-            root2.menu_option.add_command(label="Some new func")
-            root2.menu_option.add_separator()
-            root2.menu_option.add_command(label="Relogin")
-            root2.menu_option.add_command(label="Exit", command=root2.destroy)
-            root2.menu_bar.add_cascade(label="Options", menu=root2.menu_option)
-            root2.mainloop()
+            self.root2 = Root_work()
+            self.root2.menu_bar = Menu(self.root2)
+            self.root2.config(menu=self.root2.menu_bar)
+            self.root2.menu_option = Menu(self.root2.menu_bar, tearoff=0)
+            self.root2.menu_option.add_command( label="Info", command=print("This is info menu"))
+            self.root2.menu_option.add_command( label="Some new func")
+            self.root2.menu_option.add_separator()
+            self.root2.menu_option.add_command(label="Relogin", command=self.relogin)
+            self.root2.menu_option.add_command(label="Exit", command=self.root2.destroy)
+            self.root2.menu_bar.add_cascade(label="Options", menu=self.root2.menu_option)
+            self.root2.mainloop()
         else:
             print("Log failed")
 
-    # def relogin(self):
-    #     root2.destroy()
-    #     Root()
+    def relogin(self):
+        Root()
+        self.root2.destroy()
 
 
 if __name__ == "__main__":
