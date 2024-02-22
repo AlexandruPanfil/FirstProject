@@ -23,6 +23,7 @@ class Root_work(Tk):
         # self.menu_option.add_command(label="Exit", command=self.destroy)
         # self.menu_bar.add_cascade(label="Options", menu=self.menu_option)
         self.count = []
+        self.total = 0.0
 
         self.produs_code_message = Message(self, text="ID: ", font=self.font_bold, fg="black")
         self.produs_code_message.place(x=10, y=10, width=120, height=40)
@@ -64,11 +65,12 @@ class Root_work(Tk):
         for coloana in self.coloane:
             self.tabel_view.heading(coloana, text=coloana)
 
-        self.tabel_view.column("ID", width=50)
-        self.tabel_view.column("Name", width=400)
-        self.tabel_view.column("Pret", width=120)
-        self.tabel_view.column("Bucate", width=120)
-        self.tabel_view.column("Pret Total", width=160)
+
+        self.tabel_view.column("ID", width=50, anchor="center")
+        self.tabel_view.column("Name", width=400, anchor="center")
+        self.tabel_view.column("Pret", width=120, anchor="center")
+        self.tabel_view.column("Bucate", width=120, anchor="center")
+        self.tabel_view.column("Pret Total", width=160, anchor="center")
         self.tabel_view.grid(row=0, column=0)
 
         self.scroll_bar = Scrollbar(self.tabel_produse_frame, orient=VERTICAL, command=self.tabel_view.yview)
@@ -81,7 +83,7 @@ class Root_work(Tk):
         self.total_message = Message(self, text="Total: ", font=self.font_bold)
         self.total_message.place(x=10, y=715, width=100, height=40)
 
-        self.total_label = Label(self, text="", font=self.font_bold)
+        self.total_label = Label(self, text="", font=self.font_bold, justify="right")
         self.total_label.place(x=110, y=715, width=750, height=40)
 
         self.white_label = Label(self)
@@ -190,6 +192,9 @@ class Root_work(Tk):
         bar_code = int(self.add_entry.get())
         self.product = products_db.get_from_db_Products(bar_code)
         bucati_produs = Bucati(self.callback_bucati)
+        self.produs_name_label["text"] = self.product[1]
+        self.produs_pret_label["text"] = self.product[2]
+        self.produs_code_label["text"] = self.product[4]
         return self.product
 
 
@@ -197,6 +202,7 @@ class Root_work(Tk):
         self.date_tabel = []
         self.date_tabel.append(self.product)
         self.clear()
+        self.produs_buc_label["text"] = valoare
         for index, (id, nume, pret, buc, pret_total) in enumerate(self.date_tabel):
             self.count.append(id)
             id = len(self.count)
@@ -206,8 +212,25 @@ class Root_work(Tk):
 
 
         for date in self.date_tabel:
+            # print(date[4])
+            self.total += date[4]
+            self.total_label["text"] = f"{self.total:.2f}"
             self.tabel_view.insert("", END, values=date)
 
+        # self.total = 0.0
+        # for row in self.tabel_view.get_children():
+        #     print(row)
+        #     for coloana in self.tabel_view.item(row)["values"]:
+        #         pass
+        #     self.total += float(coloana)
+        #     self.total_label["text"] = f"{self.total:.2f}"
+
+        # for parent in self.tabel_view.get_children():
+        #     # print(self.tabel_view(parent))
+        #     for child in self.tabel_view.get_children(parent):
+        #         data = self.tabel_view.item()["values"]
+        #         print( data, self.tabel_view.item())
+    ...
         # TODO This part of code, if the intem is duplicating to add more quantity
         # for index, (id, nume, pret, buc, pret_total) in enumerate(self.date_tabel):
         #     if index
@@ -218,28 +241,37 @@ class Root_work(Tk):
         # return valoare
 
     def delete(self):
+        # TODO to clear all elements from tree view
         pass
 
     def anulare(self):
+        # TODO to clear last element from the tree view
         self.lista_produse_label["text"] = ""
         self.produs_name_label["text"] = ""
         self.produs_pret_label["text"] = ""
         self.produs_code_label["text"] = ""
 
     def pachet(self):
-        product = products_db.get_from_db_Products(987987)
-        self.date_tabel = []
-        self.date_tabel.append(product)
+        self.add_entry.insert(0, "987987")
+        self.add()
 
-        for index, (id, nume, pret, buc, pret_total) in enumerate(self.date_tabel):
-            self.count.append(id)
-            id = len(self.count)
-            buc = 1
-            pret_total = pret * 1
-            self.date_tabel[index] = (id, nume, pret, buc, pret_total)
+        # product = products_db.get_from_db_Products(987987)
+        # self.date_tabel = []
+        # self.date_tabel.append(product)
+        # self.produs_name_label["text"] = product[1]
+        # self.produs_pret_label["text"] = product[2]
+        # self.produs_code_label["text"] = product[4]
+        # self.produs_buc_label["text"] = 1
 
-        for date in self.date_tabel:
-            self.tabel_view.insert("", END, values=date)
+        # for index, (id, nume, pret, buc, pret_total) in enumerate(self.date_tabel):
+        #     self.count.append(id)
+        #     id = len(self.count)
+        #     buc = 1
+        #     pret_total = pret * 1
+        #     self.date_tabel[index] = (id, nume, pret, buc, pret_total)
+        #
+        # for date in self.date_tabel:
+        #     self.tabel_view.insert("", END, values=date)
 
     def discount(self):
         print("Discount 5%")
