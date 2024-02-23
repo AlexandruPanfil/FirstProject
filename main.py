@@ -9,6 +9,7 @@ class Root(Tk):
         self.start_height = 400
         self.geometry(f"{self.start_height}x{self.star_width}+500+200")
         self.title("Alexandru Panfil First Project")
+        self.iconbitmap("pythontutorial.ico")
 
         self.label_introducere = Label(self, text="Salut, aici te logezi in urmatoarea programa", font=("Colibri", 10))
         self.label_introducere.place(x=50, y=20, width =300, height= 25)
