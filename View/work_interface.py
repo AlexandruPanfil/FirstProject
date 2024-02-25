@@ -245,16 +245,24 @@ class Root_work(Tk):
 
     def delete(self):
         # TODO to clear all elements from tree view
-        pass
+        for item in self.tabel_view.get_children():
+            self.tabel_view.delete(item)
+        self.count = []
+        self.produs_code_label["text"] = ""
+        self.produs_name_label["text"] = ""
+        self.produs_buc_label["text"] = ""
+        self.produs_pret_label["text"] = ""
+
 
     def anulare(self):
         # TODO to clear last element from the tree view
-        self.lista_produse_label["text"] = ""
-        self.produs_name_label["text"] = ""
-        self.produs_pret_label["text"] = ""
         self.produs_code_label["text"] = ""
+        self.produs_name_label["text"] = ""
+        self.produs_buc_label["text"] = ""
+        self.produs_pret_label["text"] = ""
 
     def pachet(self):
+        self.add_entry.delete(0, END)
         self.add_entry.insert(0, "987987")
         self.add()
 
