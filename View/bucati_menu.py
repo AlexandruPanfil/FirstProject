@@ -7,6 +7,7 @@ class Bucati(Toplevel):
         self.geometry("400x200+400+200")
         self.title("Menu Bucati")
         self.callback = callback
+        self.iconbitmap("python_ico.ico")
         # self.configure(bg="gray")
 
         self.bucati_info = Label(self, text="Cate bucati adaugati: ", font=self.font)

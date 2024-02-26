@@ -24,6 +24,6 @@ def get_from_db_Products(bar_code):
                         return i
         db.close()
 
-# add_to_db_Products("Pachet", 2.0, 100, 987987)
+add_to_db_Products("Discount 10", 10, 999, 999998)
 
 

@@ -2,3 +2,6 @@
 
 /Lib/
 /Scripts/
+/View/test_grid.py
+/View/test_menu.py
+/View/test_work_interface.py
